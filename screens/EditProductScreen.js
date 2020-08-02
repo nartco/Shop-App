@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, Button, View, StyleSheet } from 'react-native'
+
 
 const EditProductScreen = props => {
     return (

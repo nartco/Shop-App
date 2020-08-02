@@ -1,13 +1,12 @@
 import React from 'react'
 import { Text, Button, View, StyleSheet } from 'react-native'
 
-
-const CreateProductScreen = props => {
+const YourProductsScreen = props => {
     return (
         <View>
-            <Text>Create Product Screen</Text> 
+            <Text>Your products</Text>
         </View>
     )
 }
 
-export default CreateProductScreen
+export default YourProductsScreen

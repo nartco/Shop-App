@@ -13,6 +13,7 @@ import OrderScreen from "../screens/OrderScreen";
 import CartScreen from "../screens/CartScreen";
 import CreateProductScreen from "../screens/CreateProductScreen";
 import EditProductScreen from "../screens/EditProductScreen";
+import YourProductsScreen from '../screens/YourProductsScreen'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,12 +48,11 @@ const HomeStack = ({ navigation }) => {
       <Stack.Screen name='Details' component={ProductDetailsScreen} />
       <Stack.Screen name='Order' component={OrderScreen} />
       <Stack.Screen name='Cart' component={CartScreen} />
-      <Stack.Screen name='Edit' component={EditProductScreen} />
     </Stack.Navigator>
   );
 };
 
-const CreateProduct = ({ navigation }) => {
+const ManageProducts = ({ navigation }) => {
   return (
     <Stack.Navigator screenOptions={HeaderStyle}>
       <Stack.Screen
@@ -69,12 +69,39 @@ const CreateProduct = ({ navigation }) => {
             </CustomHeaderButtons>
           )
         }}
-        name='Create Product'
-        component={CreateProductScreen}
+        name='Manage Products'
+        component={YourProductsScreen}
       />
+      <Stack.Screen name='Create Product' component={CreateProductScreen} />
+      <Stack.Screen name='Edit' component={EditProductScreen} />
     </Stack.Navigator>
   );
 };
+
+const Order = ({ navigation }) => {
+  return (
+    <Stack.Navigator screenOptions={HeaderStyle}>
+      <Stack.Screen
+        options={{
+          headerLeft: () => (
+            <CustomHeaderButtons>
+              <Item
+                title='menu'
+                iconName='ios-menu'
+                onPress={() => {
+                  navigation.toggleDrawer();
+                }}
+              />
+            </CustomHeaderButtons>
+          )
+        }}
+        name='Order'
+        component={OrderScreen}
+      />
+      <Stack.Screen name='Cart' component={CartScreen} />
+    </Stack.Navigator>
+  );
+}
 
 const ShopNavigation = props => {
   return (
@@ -91,21 +118,11 @@ const ShopNavigation = props => {
         }}
       >
         <Drawer.Screen name='Home' component={HomeStack} />
-        <Drawer.Screen name='Notifications' component={CreateProduct} />
+        <Drawer.Screen name='Order' component={Order} />
+        <Drawer.Screen name='Manage products' component={ManageProducts} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 };
-
-// headerLeft: () => (
-//   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//     <Item
-//       title='menu'
-//       iconName='ios-menu'
-//       onPress={() => {
-//         navData.navigation.toggleDrawer();
-//       }}
-//     />
-//   </HeaderButtons>
 
 export default ShopNavigation;
