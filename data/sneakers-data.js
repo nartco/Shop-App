@@ -163,7 +163,7 @@ export const SNEAKERS = [
   new Sneakers(
     "s16",
     "c4",
-    "Puma Cell Bait x Marvel Venom (Special Box/Cannister)",
+    "Puma Cell Bait x Marvel Venom",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac imperdiet ligula, et molestie lectus. Integer vel justo dolor. Pellentesque porta elit sit amet elit auctor pharetra. Suspendisse potenti. Mauris.",
     380,
     8,

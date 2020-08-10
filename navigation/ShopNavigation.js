@@ -13,16 +13,16 @@ import OrderScreen from "../screens/OrderScreen";
 import CartScreen from "../screens/CartScreen";
 import CreateProductScreen from "../screens/CreateProductScreen";
 import EditProductScreen from "../screens/EditProductScreen";
-import YourProductsScreen from '../screens/YourProductsScreen'
+import YourProductsScreen from "../screens/YourProductsScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HeaderStyle = {
   headerStyle: {
-    backgroundColor: Platform.OS === "android" ?  Colors.accent : "white"
+    backgroundColor: Platform.OS === "android" ? Colors.accent : "white"
   },
-  headerTintColor: Platform.OS === "android" ?  Colors.primary : Colors.accent
+  headerTintColor: Platform.OS === "android" ? Colors.primary : Colors.accent
 };
 
 const HomeStack = ({ navigation }) => {
@@ -40,12 +40,39 @@ const HomeStack = ({ navigation }) => {
                 }}
               />
             </CustomHeaderButtons>
+          ),
+          headerRight: () => (
+            <CustomHeaderButtons>
+              <Item
+                title='menu'
+                iconName='ios-cart'
+                onPress={() => {
+                  navigation.toggleDrawer();
+                }}
+              />
+            </CustomHeaderButtons>
           )
         }}
         name='Home'
         component={HomeScreen}
       />
-      <Stack.Screen name='Details' component={ProductDetailsScreen} />
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <CustomHeaderButtons>
+              <Item
+                title='menu'
+                iconName='ios-cart'
+                onPress={() => {
+                  navigation.toggleDrawer();
+                }}
+              />
+            </CustomHeaderButtons>
+          )
+        }}
+        name='Details'
+        component={ProductDetailsScreen}
+      />
       <Stack.Screen name='Order' component={OrderScreen} />
       <Stack.Screen name='Cart' component={CartScreen} />
     </Stack.Navigator>
@@ -101,7 +128,7 @@ const Order = ({ navigation }) => {
       <Stack.Screen name='Cart' component={CartScreen} />
     </Stack.Navigator>
   );
-}
+};
 
 const ShopNavigation = props => {
   return (
@@ -110,11 +137,12 @@ const ShopNavigation = props => {
         initialRouteName='Home'
         drawerContentOptions={{
           activeTintColor: Colors.primary,
-          inactiveTintColor: Platform.OS === "android" ? Colors.primary : Colors.accent,
+          inactiveTintColor:
+            Platform.OS === "android" ? Colors.primary : Colors.accent,
           width: 240
         }}
         drawerStyle={{
-          backgroundColor: Platform.OS === "android" ? Colors.accent : 'white'
+          backgroundColor: Platform.OS === "android" ? Colors.accent : "white"
         }}
       >
         <Drawer.Screen name='Home' component={HomeStack} />
