@@ -30,6 +30,9 @@ const HomeStack = ({ navigation }) => {
     <Stack.Navigator screenOptions={HeaderStyle}>
       <Stack.Screen
         options={{
+          headerTitleStyle: {
+            fontFamily: "qualyBold"
+          },
           headerLeft: () => (
             <CustomHeaderButtons>
               <Item
@@ -53,11 +56,12 @@ const HomeStack = ({ navigation }) => {
             </CustomHeaderButtons>
           )
         }}
-        name='Home'
+        name='SNKX'
         component={HomeScreen}
       />
       <Stack.Screen
         options={{
+          headerBackTitle: 'Home',
           headerRight: () => (
             <CustomHeaderButtons>
               <Item

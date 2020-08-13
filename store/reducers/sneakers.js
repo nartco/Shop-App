@@ -1,10 +1,16 @@
 import { SNEAKERS, CATEGORIES } from "../../data/sneakers-data";
-import { TOGGLE_CART, SET_FILTERS, ADD_SNEAKERS } from "../actions/sneakers";
+import {
+  TOGGLE_CART,
+  SET_FILTERS,
+  ADD_SNEAKERS,
+  SELECT_BRAND
+} from "../actions/sneakers";
 
 const initialState = {
   sneakers: SNEAKERS,
   filtersSneakers: SNEAKERS,
-  cartSneakers: []
+  cartSneakers: [],
+  brands: CATEGORIES
 };
 
 const sneakersReducer = (state = initialState, action) => {
@@ -18,7 +24,9 @@ const sneakersReducer = (state = initialState, action) => {
         updatedFavMeals.splice(existingIndex, 1);
         return { ...state, cartSneakers: updatedSneakersCart };
       } else {
-        const sneakers = state.sneakers.find(sneakers => sneakers.id === action.sneakersId);
+        const sneakers = state.sneakers.find(
+          sneakers => sneakers.id === action.sneakersId
+        );
         return { ...state, cartSneakers: state.cartSneakers.concat(sneakers) };
       }
     // case SET_FILTERS:

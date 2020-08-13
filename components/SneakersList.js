@@ -12,7 +12,8 @@ const SneakersList = props => {
       onSelectSneakers={() => {
         props.navigation.navigate("Details", {
           sneakersId: itemData.item.id,
-          sneakersTitle: itemData.item.title
+          sneakersTitle: itemData.item.title,
+          categoryId: itemData.item.categoryIds
         });
       }}
     />
