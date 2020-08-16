@@ -10,8 +10,8 @@ const Underline = props => {
 
 const styles = StyleSheet.create({
     underline: {
-        borderBottomColor: Colors.accentTransparent,
-        borderBottomWidth: 15
+        borderBottomColor: Colors.primaryTransparent,
+        borderBottomWidth: 2
       }
 })
 

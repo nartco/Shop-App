@@ -19,7 +19,7 @@ export const DefaultBoldText = props => {
 const styles = StyleSheet.create({
     title: {
         fontFamily: 'qualyBold',
-        color: Colors.accentTitle,
+        color: Colors.primary,
         fontSize: 18
     },
     default: {

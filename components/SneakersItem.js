@@ -56,11 +56,11 @@ const SneakersItem = props => {
             />
           </View>
           <View style={styles.cardTitle}>
-            <Text style={styles.infosText}>{props.title}</Text>
-            <Underline />
-            <Text style={styles.infosText}>{props.size}us</Text>
-            <Underline />
-            <Text style={styles.infosText}>{props.price}$</Text>
+            <Text style={[styles.infosText, styles.title]}>{props.title}</Text>
+           
+            <Text style={styles.infosText}>{props.size}us | {props.price}$</Text>
+           
+            {/* <Text style={styles.infosText}>{props.price}$</Text> */}
           </View>
         </View>
       </TouchableCmp>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 10,
-    flexDirection: "row",
+    flexDirection: "column",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -98,18 +98,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   cardTitle: {
-    margin: 7,
+    marginHorizontal: 7,
     paddingLeft: 10,
-    paddingVertical: 10,
-    flexGrow: 1,
-    flex: 1,
     justifyContent: "space-between"
   },
   infosText: {
     marginVertical: 6,
     textAlign: "center",
-    flexShrink: 1,
-    color: Colors.primary,
+    color: Colors.primaryTransparentText,
+    fontFamily: 'openSans',
+  },
+  title: {
+    fontFamily: 'openSansBold',
+    color: Colors.primary
   }
 });
 

@@ -9,13 +9,14 @@ import {
   ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Underline from "../components/Underline";
 import { useSelector } from "react-redux";
 import {
   TitleText,
   DefaultText,
   DefaultBoldText
 } from "../components/CustomText";
+
+import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
 
 const ProductDetailsScreen = props => {
@@ -58,7 +59,6 @@ const ProductDetailsScreen = props => {
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
-        <TitleText style={styles.title}>{sneakersTitle}</TitleText>
         <Image
           source={{ uri: selectedSneakers.imageUrl }}
           style={{
@@ -69,34 +69,30 @@ const ProductDetailsScreen = props => {
         />
       </View>
       <View style={styles.infosContainer}>
-        {/* <TitleText style={styles.infosText}>{sneakersTitle}</TitleText>
-        <Underline style={styles.underline} /> */}
-        <Ionicons
-          style={styles.infosText}
-          name='ios-add-circle-outline'
-          size={32}
-          color={Colors.primary}
-        />
-        <Underline style={styles.underline} />
-        <DefaultText style={styles.infosText}>
-          {selectedSneakers.size}US
-        </DefaultText>
-        <Underline style={styles.underline} />
-        <DefaultText style={styles.infosText}>
-          {selectedSneakers.price}$
-        </DefaultText>
-        <Underline style={styles.underline} />
-        
         <View style={styles.brandContainer}>
           <Image
             source={images[selectedBrand.title]}
             style={{
-              width: 70,
-              height: 70,
+              width: 50,
+              height: 50,
               tintColor: Colors.primary
             }}
             resizeMode='contain'
           />
+        </View>
+        <TitleText style={styles.title}>{sneakersTitle}</TitleText>
+        <DefaultText style={styles.infosText}>
+          $ {selectedSneakers.price}
+        </DefaultText>
+        <ScrollView horizontal={true}>
+          <View style={styles.squareSize}>
+            <DefaultText style={styles.infosText}>
+              {selectedSneakers.size}US
+            </DefaultText>
+          </View>
+        </ScrollView>
+        <View style={styles.buttonContainer}>
+          <CustomButton title='add to cart' onpress={() => caches.log("x")} />
         </View>
       </View>
     </ScrollView>
@@ -105,19 +101,17 @@ const ProductDetailsScreen = props => {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
     overflow: "hidden",
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
     backgroundColor: "white",
     alignItems: "center"
   },
   brandContainer: {
     padding: 10
+  },
+  buttonContainer: {
+    padding: 20
   },
   infosContainer: {
     alignContent: "center",
@@ -144,6 +138,10 @@ const styles = StyleSheet.create({
   underline: {
     alignSelf: "stretch",
     borderBottomWidth: 25
+  },
+  squareSize:{
+    borderWidth: 4,
+    
   }
 });
 export default ProductDetailsScreen;
