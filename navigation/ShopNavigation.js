@@ -20,7 +20,7 @@ const Drawer = createDrawerNavigator();
 
 const HeaderStyle = {
   headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.accent : "white"
+    backgroundColor: "white"
   },
   headerTintColor: Platform.OS === "android" ? Colors.primary : Colors.accent
 };
@@ -61,7 +61,7 @@ const HomeStack = ({ navigation }) => {
       />
       <Stack.Screen
         options={{
-          headerBackTitle: 'Home',
+          headerBackTitle: "Home",
           headerRight: () => (
             <CustomHeaderButtons>
               <Item
@@ -141,12 +141,11 @@ const ShopNavigation = props => {
         initialRouteName='Home'
         drawerContentOptions={{
           activeTintColor: Colors.primary,
-          inactiveTintColor:
-            Platform.OS === "android" ? Colors.primary : Colors.accent,
+          inactiveTintColor: "black",
           width: 240
         }}
         drawerStyle={{
-          backgroundColor: Platform.OS === "android" ? Colors.accent : "white"
+          backgroundColor: 'white'
         }}
       >
         <Drawer.Screen name='Home' component={HomeStack} />

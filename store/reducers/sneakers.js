@@ -1,6 +1,7 @@
 import { SNEAKERS, CATEGORIES } from "../../data/sneakers-data";
 import {
   TOGGLE_CART,
+  SET_SIZE,
   SET_FILTERS,
   ADD_SNEAKERS,
   SELECT_BRAND
@@ -10,7 +11,8 @@ const initialState = {
   sneakers: SNEAKERS,
   filtersSneakers: SNEAKERS,
   cartSneakers: [],
-  brands: CATEGORIES
+  brands: CATEGORIES,
+  size: 0
 };
 
 const sneakersReducer = (state = initialState, action) => {
@@ -29,6 +31,8 @@ const sneakersReducer = (state = initialState, action) => {
         );
         return { ...state, cartSneakers: state.cartSneakers.concat(sneakers) };
       }
+      case SET_SIZE:
+        return { ...state, size: action.size }
     // case SET_FILTERS:
     //   const appliedFilters = action.filters;
     //   const filteredMeals = state.meals.filter(meal => {

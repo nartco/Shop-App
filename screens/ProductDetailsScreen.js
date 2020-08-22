@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  Button,
-  View,
-  StyleSheet,
-  Image,
-  Dimensions,
-  ScrollView
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, StyleSheet, Image, Dimensions, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import {
   TitleText,
   DefaultText,
   DefaultBoldText
 } from "../components/CustomText";
+import SizeButton from "../components/SizeButton";
 
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
@@ -49,6 +41,8 @@ const ProductDetailsScreen = props => {
     state.sneakers.brands.find(brandId => brandId.id === categoryId)
   );
 
+  const sizes = [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 12];
+
   const images = {
     Nike: require("../assets/images/nike.png"),
     Adidas: require("../assets/images/adidas.png"),
@@ -81,15 +75,16 @@ const ProductDetailsScreen = props => {
           />
         </View>
         <TitleText style={styles.title}>{sneakersTitle}</TitleText>
-        <DefaultText style={styles.infosText}>
+        <DefaultText style={styles.infosPrice}>
           $ {selectedSneakers.price}
         </DefaultText>
+        <DefaultText style={styles.infosText}>
+          {selectedSneakers.description}
+        </DefaultText>
         <ScrollView horizontal={true}>
-          <View style={styles.squareSize}>
-            <DefaultText style={styles.infosText}>
-              {selectedSneakers.size}US
-            </DefaultText>
-          </View>
+          {sizes.map(size => (
+            <SizeButton value={size} style={styles.sizeContainer} key={size} />
+          ))}
         </ScrollView>
         <View style={styles.buttonContainer}>
           <CustomButton title='add to cart' onpress={() => caches.log("x")} />
@@ -120,8 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   title: {
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    padding: 20,
     textAlign: "center",
     shadowOffset: {
       width: 0,
@@ -132,16 +126,18 @@ const styles = StyleSheet.create({
     elevation: 3
   },
   infosText: {
-    padding: 20,
+    paddingHorizontal: 40,
+    paddingVertical: 15,
     textAlign: "center"
   },
-  underline: {
-    alignSelf: "stretch",
-    borderBottomWidth: 25
+  infosPrice: {
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+    textAlign: "center",
+    fontSize: 20
   },
-  squareSize:{
-    borderWidth: 4,
-    
+  sizeContainer: {
+    marginVertical: 20
   }
 });
 export default ProductDetailsScreen;
