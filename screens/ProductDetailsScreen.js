@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, Dimensions, ScrollView } from "react-native";
-import { useSelector } from "react-redux";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  ScrollView,
+  BackHandler
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import {
   TitleText,
   DefaultText,
@@ -8,10 +15,13 @@ import {
 } from "../components/CustomText";
 import SizeButton from "../components/SizeButton";
 
+import { clearSize, toggleCart } from "../store/actions/sneakers";
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
 
 const ProductDetailsScreen = props => {
+  const dispatch = useDispatch();
+
   const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
     Dimensions.get("window").height
   );
@@ -20,6 +30,14 @@ const ProductDetailsScreen = props => {
   );
 
   useEffect(() => {
+    const backAction = () => {
+      dispatch(clearSize());
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction()
+    );
     const updateLayout = () => {
       setAvailableDeviceWidth(Dimensions.get("window").width);
       setAvailableDeviceHeight(Dimensions.get("window").height);
@@ -28,18 +46,21 @@ const ProductDetailsScreen = props => {
 
     return () => {
       Dimensions.removeEventListener("change", updateLayout);
+      backHandler.remove();
     };
-  });
+  }, []);
 
   const { sneakersId, sneakersTitle, categoryId } = props.route.params;
+
+  const confirmHandler = () => {
+    dispatch(toggleCart(sneakersId))
+  }
 
   const selectedSneakers = useSelector(state =>
     state.sneakers.sneakers.find(sneakers => sneakers.id === sneakersId)
   );
 
-  const selectedBrand = useSelector(state =>
-    state.sneakers.brands.find(brandId => brandId.id === categoryId)
-  );
+  const selectedSize = useSelector(state => state.sneakers.size);
 
   const sizes = [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 12];
 
@@ -65,7 +86,7 @@ const ProductDetailsScreen = props => {
       <View style={styles.infosContainer}>
         <View style={styles.brandContainer}>
           <Image
-            source={images[selectedBrand.title]}
+            source={images[categoryId]}
             style={{
               width: 50,
               height: 50,
@@ -83,12 +104,24 @@ const ProductDetailsScreen = props => {
         </DefaultText>
         <ScrollView horizontal={true}>
           {sizes.map(size => (
-            <SizeButton value={size} style={styles.sizeContainer} key={size} />
+            <SizeButton
+              value={size}
+              available={selectedSneakers.size}
+              style={
+                selectedSneakers.size === size
+                  ? styles.sizeContainer
+                  : styles.disabledSizeContainer
+              }
+              key={size}
+            />
           ))}
         </ScrollView>
-        <View style={styles.buttonContainer}>
-          <CustomButton title='add to cart' onpress={() => caches.log("x")} />
-        </View>
+        <CustomButton
+          title='add to cart'
+          onPress={confirmHandler}
+          sneakersId={sneakersId}
+          style={selectedSize !== 0 ? styles.addToCartButton : null}
+        />
       </View>
     </ScrollView>
   );
@@ -104,9 +137,6 @@ const styles = StyleSheet.create({
   },
   brandContainer: {
     padding: 10
-  },
-  buttonContainer: {
-    padding: 20
   },
   infosContainer: {
     alignContent: "center",
@@ -137,7 +167,21 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   sizeContainer: {
-    marginVertical: 20
+    marginVertical: 30
+  },
+  disabledSizeContainer: {
+    marginVertical: 30,
+    backgroundColor: "rgba(0,0,0,0.03)"
+  },
+  addToCartButton: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11
   }
 });
 export default ProductDetailsScreen;

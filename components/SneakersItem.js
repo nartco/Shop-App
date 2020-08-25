@@ -10,8 +10,6 @@ import {
   TouchableNativeFeedback
 } from "react-native";
 
-import Underline from '../components/Underline'
-
 import Colors from "../constants/Colors";
 
 const SneakersItem = props => {
@@ -58,9 +56,9 @@ const SneakersItem = props => {
           <View style={styles.cardTitle}>
             <Text style={[styles.infosText, styles.title]}>{props.title}</Text>
            
-            <Text style={styles.infosText}>{props.size}us | {props.price}$</Text>
+            <Text style={styles.infosText}>{props.size}us | {props.price}$ {props.quantity ? `|quantity: ${props.quantity}` : null}</Text>
+
            
-            {/* <Text style={styles.infosText}>{props.price}$</Text> */}
           </View>
         </View>
       </TouchableCmp>

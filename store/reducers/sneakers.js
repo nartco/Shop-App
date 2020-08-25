@@ -1,17 +1,16 @@
-import { SNEAKERS, CATEGORIES } from "../../data/sneakers-data";
+import { SNEAKERS } from "../../data/sneakers-data";
 import {
   TOGGLE_CART,
   SET_SIZE,
+  CLEAR_SIZE,
   SET_FILTERS,
-  ADD_SNEAKERS,
-  SELECT_BRAND
+  ADD_SNEAKERS
 } from "../actions/sneakers";
 
 const initialState = {
   sneakers: SNEAKERS,
   filtersSneakers: SNEAKERS,
   cartSneakers: [],
-  brands: CATEGORIES,
   size: 0
 };
 
@@ -23,16 +22,32 @@ const sneakersReducer = (state = initialState, action) => {
       );
       if (existingIndex >= 0) {
         const updatedSneakersCart = [...state.cartSneakers];
-        updatedFavMeals.splice(existingIndex, 1);
+        updatedSneakersCart.splice(existingIndex, 1);
         return { ...state, cartSneakers: updatedSneakersCart };
       } else {
-        const sneakers = state.sneakers.find(
+        let sneakers = state.sneakers.find(
           sneakers => sneakers.id === action.sneakersId
         );
+        sneakers = {...sneakers}
+        const verifQuantity = state.cartSneakers.reduce(
+          (a, sneakers) => (sneakers.id === action.sneakersId ? a + 1 : a),
+          0
+        );
+        sneakers.quantity =
+          state.cartSneakers.length === 0
+            ? 1
+            : verifQuantity === 0
+            ? 1
+            : verifQantity;
+        sneakers.sizeSelected = state.size;
         return { ...state, cartSneakers: state.cartSneakers.concat(sneakers) };
       }
-      case SET_SIZE:
-        return { ...state, size: action.size }
+    case SET_SIZE:
+      const verif = state.size === action.size ? 0 : action.size;
+      return { ...state, size: verif };
+    case CLEAR_SIZE:
+      return { ...state, size: 0 };
+
     // case SET_FILTERS:
     //   const appliedFilters = action.filters;
     //   const filteredMeals = state.meals.filter(meal => {

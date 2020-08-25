@@ -1,33 +1,10 @@
  import Category from '../models/category';
  import Sneakers from '../models/sneakers';
 
-export const CATEGORIES = [
-  new Category(
-    "c1",
-    "Nike",
-    "../assets/images/nike.png"
-  ),
-  new Category(
-    "c2",
-    "Adidas",
-    "../assets/images/adidas.png"
-  ),
-  new Category(
-    "c3",
-    "Jordan",
-    "../assets/images/jordan.png"
-  ),
-  new Category(
-    "c4",
-    "Puma",
-    "../assets/images/puma.png"
-  )
-];
-
 export const SNEAKERS = [
   new Sneakers(
     "s1",
-    "c3",
+    "Jordan",
     "Jordan 12 Retro Black University Gold",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     230,
@@ -36,7 +13,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s2",
-    "c2",
+    "Adidas",
     "adidas Yeezy Boost 350 V2 Zyon",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     240,
@@ -45,7 +22,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s3",
-    "c3",
+    "Jordan",
     "Jordan 4 Retro Off-White Sail",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     740,
@@ -54,7 +31,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s4",
-    "c4",
+    "Puma",
     "Puma RS-Dreamer J. Cole Black",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     156,
@@ -63,7 +40,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s5",
-    "c1",
+    "Nike",
     "Nike SB Dunk Low Grateful Dead Bears Opti Yellow",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     800,
@@ -72,7 +49,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s6",
-    "c1",
+    "Nike",
     "Nike Air Force 1 Low White '07",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     80,
@@ -81,7 +58,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s7",
-    "c2",
+    "Adidas",
     "adidas Yeezy Boost 350 V2 Cinder",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     287,
@@ -90,7 +67,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s8",
-    "c4",
+    "Puma",
     "Puma Cell Endura Rhude Sundry",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     90,
@@ -99,7 +76,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s9",
-    "c3",
+    "Jordan",
     "Jordan 12 Retro Chinese New Year 2019 (PS)",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     106,
@@ -108,7 +85,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s10",
-    "c1",
+    "Nike",
     "Nike Air Force 1 Low Double Layer White Obsidian Red (PS)",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     80,
@@ -117,7 +94,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s11",
-    "c2",
+    "Adidas",
     "adidas Yeezy Boost 700 Wave Runner Solid Grey",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     430,
@@ -126,7 +103,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s12",
-    "c4",
+    "Puma",
     "Puma Disc Blaze Bape Camo Green",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     230,
@@ -135,7 +112,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s13",
-    "c1",
+    "Nike",
     "Nike React Element 87 Anthracite Black",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     100,
@@ -144,7 +121,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s14",
-    "c3",
+    "Jordan",
     "Jordan 11 Retro Concord (2018)",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     320,
@@ -153,7 +130,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s15",
-    "c2",
+    "Adidas",
     "adidas Crazy BYW 2.0 Pharrell",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     70,
@@ -162,7 +139,7 @@ export const SNEAKERS = [
   ),
   new Sneakers(
     "s16",
-    "c4",
+    "Puma",
     "Puma Cell Bait x Marvel Venom",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis laoreet nibh, vel lacinia lorem maximus sit amet. Sed consectetur magna sed massa molestie lobortis. Praesent nec laoreet lacus. Sed sit amet nunc feugiat sapien ultrices euismod.",
     380,

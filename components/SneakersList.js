@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SneakersItem from "./SneakersItem";
 
@@ -7,7 +7,8 @@ const SneakersList = props => {
     <SneakersItem
       title={itemData.item.title}
       imageUrl={itemData.item.imageUrl}
-      size={itemData.item.size}
+      size={itemData.item.sizeSelected ? itemData.item.sizeSelected : itemData.item.size}
+      quantity={itemData.item.quantity ? itemData.item.quantity : null}
       price={itemData.item.price}
       onSelectSneakers={() => {
         props.navigation.navigate("Details", {

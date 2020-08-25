@@ -1,9 +1,13 @@
 import React from "react";
-import { Button } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators
+} from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomHeaderButtons, Item } from "../components/HeaderButton";
+import { Badge } from "react-native-elements";
 
 import Colors from "../constants/Colors";
 
@@ -23,6 +27,15 @@ const HeaderStyle = {
     backgroundColor: "white"
   },
   headerTintColor: Platform.OS === "android" ? Colors.primary : Colors.accent
+};
+
+const Cart = ({ navigation }) => {
+  return (
+    <Stack.Navigator screenOptions={HeaderStyle}>
+      <Stack.Screen name='Cart' component={CartScreen} />
+      <Stack.Screen name='Order' component={OrderScreen} />
+    </Stack.Navigator>
+  );
 };
 
 const HomeStack = ({ navigation }) => {
@@ -50,7 +63,7 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.toggleDrawer();
+                  navigation.navigate("Cart");
                 }}
               />
             </CustomHeaderButtons>
@@ -60,7 +73,12 @@ const HomeStack = ({ navigation }) => {
         component={HomeScreen}
       />
       <Stack.Screen
-        options={{
+        options={({ route }) => ({
+          transitionSpec: {
+            open: config,
+            close: config
+          },
+          title: route.params.categoryId,
           headerBackTitle: "Home",
           headerRight: () => (
             <CustomHeaderButtons>
@@ -68,17 +86,20 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.toggleDrawer();
+                  navigation.navigate("Cart");
                 }}
               />
             </CustomHeaderButtons>
           )
-        }}
+        })}
         name='Details'
         component={ProductDetailsScreen}
       />
-      <Stack.Screen name='Order' component={OrderScreen} />
-      <Stack.Screen name='Cart' component={CartScreen} />
+      <Stack.Screen
+        name='Cart'
+        options={{ headerBackTitle: "Product" }}
+        component={Cart}
+      />
     </Stack.Navigator>
   );
 };
@@ -129,7 +150,6 @@ const Order = ({ navigation }) => {
         name='Order'
         component={OrderScreen}
       />
-      <Stack.Screen name='Cart' component={CartScreen} />
     </Stack.Navigator>
   );
 };
@@ -145,7 +165,7 @@ const ShopNavigation = props => {
           width: 240
         }}
         drawerStyle={{
-          backgroundColor: 'white'
+          backgroundColor: "white"
         }}
       >
         <Drawer.Screen name='Home' component={HomeStack} />
@@ -155,5 +175,19 @@ const ShopNavigation = props => {
     </NavigationContainer>
   );
 };
+
+const config = {
+  animation: "spring",
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01
+  }
+};
+
+const styles = StyleSheet.create({});
 
 export default ShopNavigation;
