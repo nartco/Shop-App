@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SneakersList from "../components/SneakersList";
 import { useSelector, useDispatch } from "react-redux";
 import { clearSize } from "../store/actions/sneakers";
+import { EvilIcons } from "@expo/vector-icons";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
 const CartScreen = props => {
@@ -9,17 +10,26 @@ const CartScreen = props => {
   useEffect(() => {
     dispatch(clearSize());
   }, []);
-  
-  const cartSize = useSelector(state => state.sneakers.cartSneakers);
+
+  const cart = useSelector(state => state.sneakers.cartSneakers);
   const selectedSneakers = useSelector(state => state.sneakers.cartSneakers);
-  let total = cartSize.reduce((a, sneakers) => a + sneakers.price, 0);
+  let total = cart.reduce((a, sneakers) => a + sneakers.price, 0);
+
+  if(cart.length === 0 || !cart) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <EvilIcons name='cart' type='EvilIcons' reverse size={40}/>
+        <Text>Your cart is empty</Text>
+      </View>
+    )
+  }
 
   return (
     <View style={{ flex: 1 }}>
       <SneakersList listData={selectedSneakers} navigation={props.navigation} />
       <TouchableOpacity
-        disabled={cartSize.length <= 0 ? true : false}
-        onPress={() => console.log("x")}
+        disabled={cart.length <= 0 ? true : false}
+        onPress={() => props.navigation.navigate("Validation")}
         style={styles.appButtonContainer}
       >
         <Text style={styles.appButtonText}>${total} | order</Text>

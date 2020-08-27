@@ -3,6 +3,7 @@ import {
   TOGGLE_CART,
   SET_SIZE,
   CLEAR_SIZE,
+  ORDER,
   SET_FILTERS,
   ADD_SNEAKERS
 } from "../actions/sneakers";
@@ -11,7 +12,8 @@ const initialState = {
   sneakers: SNEAKERS,
   filtersSneakers: SNEAKERS,
   cartSneakers: [],
-  size: 0
+  size: 0,
+  order: []
 };
 
 const sneakersReducer = (state = initialState, action) => {
@@ -28,7 +30,7 @@ const sneakersReducer = (state = initialState, action) => {
         let sneakers = state.sneakers.find(
           sneakers => sneakers.id === action.sneakersId
         );
-        sneakers = {...sneakers}
+        sneakers = { ...sneakers };
         const verifQuantity = state.cartSneakers.reduce(
           (a, sneakers) => (sneakers.id === action.sneakersId ? a + 1 : a),
           0
@@ -48,6 +50,27 @@ const sneakersReducer = (state = initialState, action) => {
     case CLEAR_SIZE:
       return { ...state, size: 0 };
 
+    case ORDER:
+      let updatedSneakers = [...state.sneakers];
+      let cart = [...state.cartSneakers];
+
+      cart = cart.map(s => {
+        const existingIndex = updatedSneakers.findIndex(
+          sneakers => sneakers.id === s.id
+        );
+        updatedSneakers.splice(existingIndex, 1);
+      });
+
+     
+      return {
+        ...state,
+        order: [
+          ...state.order,
+          [action.id, action.email, action.tel, action.address, action.name]
+        ],
+        filtersSneakers: updatedSneakers,
+        sneakers: updatedSneakers
+      };
     // case SET_FILTERS:
     //   const appliedFilters = action.filters;
     //   const filteredMeals = state.meals.filter(meal => {

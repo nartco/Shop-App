@@ -18,6 +18,8 @@ import CartScreen from "../screens/CartScreen";
 import CreateProductScreen from "../screens/CreateProductScreen";
 import EditProductScreen from "../screens/EditProductScreen";
 import YourProductsScreen from "../screens/YourProductsScreen";
+import ValidationCartScreen from "../screens/ValidationCartScreen";
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,11 +31,11 @@ const HeaderStyle = {
   headerTintColor: Platform.OS === "android" ? Colors.primary : Colors.accent
 };
 
-const Cart = ({ navigation }) => {
+const CartStack = ({ navigation }) => {
   return (
     <Stack.Navigator screenOptions={HeaderStyle}>
       <Stack.Screen name='Cart' component={CartScreen} />
-      <Stack.Screen name='Order' component={OrderScreen} />
+      <Stack.Screen name='Validation' component={ValidationCartScreen} />
     </Stack.Navigator>
   );
 };
@@ -63,7 +65,7 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.navigate("Cart");
+                  navigation.navigate('Cart');
                 }}
               />
             </CustomHeaderButtons>
@@ -86,7 +88,7 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.navigate("Cart");
+                  navigation.navigate('Cart');
                 }}
               />
             </CustomHeaderButtons>
@@ -98,7 +100,7 @@ const HomeStack = ({ navigation }) => {
       <Stack.Screen
         name='Cart'
         options={{ headerBackTitle: "Product" }}
-        component={Cart}
+        component={CartStack}
       />
     </Stack.Navigator>
   );

@@ -9,11 +9,18 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback
 } from "react-native";
-
+import { useDispatch } from "react-redux";
+import { toggleCart } from "../store/actions/sneakers";
+import { Entypo } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 
 const SneakersItem = props => {
-  
+  const dispatch = useDispatch();
+
+  const removeCart = () => {
+    dispatch(toggleCart(props.sneakersId));
+  };
+
   const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
     Dimensions.get("window").height
   );
@@ -38,10 +45,20 @@ const SneakersItem = props => {
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
-
+  // dsisabled true && render delete button product,qty
   return (
     <View style={styles.list}>
-      <TouchableCmp onPress={props.onSelectSneakers}>
+      {props.quantity ? (
+        <View style={styles.trashIcon}>
+          <TouchableCmp onPress={removeCart}>
+            <Entypo name="cross"  size={29} />
+          </TouchableCmp>
+        </View>
+      ) : null}
+      <TouchableCmp
+        onPress={props.onSelectSneakers}
+        disabled={props.quantity ? true : false}
+      >
         <View style={styles.card}>
           <View style={styles.imgContainer}>
             <Image
@@ -55,10 +72,11 @@ const SneakersItem = props => {
           </View>
           <View style={styles.cardTitle}>
             <Text style={[styles.infosText, styles.title]}>{props.title}</Text>
-           
-            <Text style={styles.infosText}>{props.size}us | {props.price}$ {props.quantity ? `|quantity: ${props.quantity}` : null}</Text>
 
-           
+            <Text style={styles.infosText}>
+              {props.size}us | {props.price}${" "}
+              {props.quantity ? `|quantity: ${props.quantity}` : null}
+            </Text>
           </View>
         </View>
       </TouchableCmp>
@@ -73,10 +91,9 @@ const styles = StyleSheet.create({
     alignItems: "stretch"
   },
   imgContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
     // marginTop: 3,
-    marginLeft: 10,
-    overflow: "hidden"
+    marginLeft: 10
   },
   card: {
     marginBottom: 10,
@@ -93,7 +110,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderColor: 'white',
     borderRadius: 10,
-    backgroundColor: 'white'
+    backgroundColor: "white"
   },
   cardTitle: {
     marginHorizontal: 7,
@@ -104,11 +121,18 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     textAlign: "center",
     color: Colors.primaryTransparentText,
-    fontFamily: 'openSans',
+    fontFamily: "openSans"
   },
   title: {
-    fontFamily: 'openSansBold',
+    fontFamily: "openSansBold",
     color: Colors.primary
+  },
+  trashIcon: {
+    position: "absolute",
+    top: "3%",
+    right: "3%",
+    zIndex: 1,
+    elevation: 4
   }
 });
 

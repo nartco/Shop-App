@@ -5,6 +5,7 @@ import SneakersItem from "./SneakersItem";
 const SneakersList = props => {
   const renderSneakersList = itemData => (
     <SneakersItem
+      sneakersId={itemData.item.id}
       title={itemData.item.title}
       imageUrl={itemData.item.imageUrl}
       size={itemData.item.sizeSelected ? itemData.item.sizeSelected : itemData.item.size}

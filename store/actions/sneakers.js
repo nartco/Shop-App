@@ -3,6 +3,8 @@ export const SET_FILTERS = "SET_FILTERS";
 export const ADD_SNEAKERS = "ADD_SNEAKERS";
 export const SET_SIZE = "SET_SIZE";
 export const CLEAR_SIZE = "CLEAR_SIZE"
+export const ORDER = 'ORDER'
+
 
 export const toggleCart = id => {
   return { type: TOGGLE_CART, sneakersId: id };
@@ -18,6 +20,10 @@ export const setSize = size => {
 
 export const clearSize = () => {
   return { type: CLEAR_SIZE }
+}
+
+export const order = (name, address, tel, email) => {
+  return { type: ORDER, name: name, address: address, tel: tel, email: email }
 }
 
 
