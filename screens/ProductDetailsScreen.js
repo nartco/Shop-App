@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
+  Text,
   StyleSheet,
   Image,
   Dimensions,
@@ -53,8 +54,8 @@ const ProductDetailsScreen = props => {
   const { sneakersId, sneakersTitle, categoryId } = props.route.params;
 
   const confirmHandler = () => {
-    dispatch(toggleCart(sneakersId))
-  }
+    dispatch(toggleCart(sneakersId));
+  };
 
   const selectedSneakers = useSelector(state =>
     state.sneakers.sneakers.find(sneakers => sneakers.id === sneakersId)
@@ -70,6 +71,14 @@ const ProductDetailsScreen = props => {
     Jordan: require("../assets/images/jordan.png"),
     Puma: require("../assets/images/puma.png")
   };
+
+  if (!selectedSneakers) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>No sneakers selected</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView>

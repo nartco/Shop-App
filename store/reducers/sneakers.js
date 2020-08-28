@@ -4,6 +4,7 @@ import {
   SET_SIZE,
   CLEAR_SIZE,
   ORDER,
+  CLEAR_CART,
   SET_FILTERS,
   ADD_SNEAKERS
 } from "../actions/sneakers";
@@ -54,7 +55,7 @@ const sneakersReducer = (state = initialState, action) => {
       let updatedSneakers = [...state.sneakers];
       let cart = [...state.cartSneakers];
 
-      cart = cart.map(s => {
+      cart.map(s => {
         const existingIndex = updatedSneakers.findIndex(
           sneakers => sneakers.id === s.id
         );
@@ -66,11 +67,16 @@ const sneakersReducer = (state = initialState, action) => {
         ...state,
         order: [
           ...state.order,
-          [action.id, action.email, action.tel, action.address, action.name]
+          [cart, action.email, action.tel, action.address, action.name]
         ],
         filtersSneakers: updatedSneakers,
         sneakers: updatedSneakers
       };
+
+
+      case CLEAR_CART: 
+      return { ...state, cartSneakers: [] }
+     
     // case SET_FILTERS:
     //   const appliedFilters = action.filters;
     //   const filteredMeals = state.meals.filter(meal => {

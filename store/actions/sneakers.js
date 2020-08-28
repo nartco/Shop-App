@@ -3,6 +3,7 @@ export const SET_FILTERS = "SET_FILTERS";
 export const ADD_SNEAKERS = "ADD_SNEAKERS";
 export const SET_SIZE = "SET_SIZE";
 export const CLEAR_SIZE = "CLEAR_SIZE"
+export const CLEAR_CART = "CLEAR_CART"
 export const ORDER = 'ORDER'
 
 
@@ -26,6 +27,9 @@ export const order = (name, address, tel, email) => {
   return { type: ORDER, name: name, address: address, tel: tel, email: email }
 }
 
+export const clearCart = () => {
+  return { type: CLEAR_CART  }
+}
 
 export const addSneakers = (
   id = null,

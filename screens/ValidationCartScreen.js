@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { StackActions } from '@react-navigation/native';
+import React, { useEffect, useState } from "react";
+import { StackActions } from "@react-navigation/native";
+import { Entypo } from "@expo/vector-icons";
 
 import validator from "validator";
 import {
@@ -12,19 +13,24 @@ import {
   TouchableOpacity
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { order } from "../store/actions/sneakers";
+import { order, clearCart } from "../store/actions/sneakers";
 
 const OrderScreen = props => {
-    
+  const [orderDone, setOrderDone] = React.useState(false);
+
   const dispatch = useDispatch();
 
-  
-  const validation = () => {
-    dispatch(order(name, address, tel, email));
+  const home = () => {
     props.navigation.reset({
         index: 0,
         routes: [{name: 'Home'}],
       });
+  }
+
+  const validation = () => {
+    dispatch(order(name, address, tel, email));
+    dispatch(clearCart())
+    setOrderDone(true);
   };
 
   const [disabled, setDisabled] = React.useState(true);
@@ -42,6 +48,21 @@ const OrderScreen = props => {
       setDisabled(true);
     }
   }, [address, name, email, tel]);
+
+  if (orderDone === true) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Entypo name='check' type='Entypo' reverse size={40} />
+        <Text>SUCCESS !</Text>
+        <TouchableOpacity
+          onPress={() => home()}
+          style={styles.appButtonContainer}
+        >
+          <Text style={styles.appButtonText}>Back To Home</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -81,7 +102,7 @@ const OrderScreen = props => {
           returnKeyType={"done"}
         />
         <TouchableOpacity
-        //   disabled={disabled}
+          //   disabled={disabled}
           onPress={validation}
           style={styles.appButtonContainer}
         >

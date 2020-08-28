@@ -46,9 +46,11 @@ const SneakersItem = props => {
     TouchableCmp = TouchableNativeFeedback;
   }
   // dsisabled true && render delete button product,qty
+
+ 
   return (
     <View style={styles.list}>
-      {props.quantity ? (
+      {props.cart ? (
         <View style={styles.trashIcon}>
           <TouchableCmp onPress={removeCart}>
             <Entypo name="cross"  size={29} />
