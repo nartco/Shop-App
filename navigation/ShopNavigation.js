@@ -15,11 +15,9 @@ import HomeScreen from "../screens/HomeScreen";
 import ProductDetailsScreen from "../screens/ProductDetailsScreen";
 import OrderScreen from "../screens/OrderScreen";
 import CartScreen from "../screens/CartScreen";
-import CreateProductScreen from "../screens/CreateProductScreen";
 import EditProductScreen from "../screens/EditProductScreen";
 import YourProductsScreen from "../screens/YourProductsScreen";
 import ValidationCartScreen from "../screens/ValidationCartScreen";
-
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -65,7 +63,7 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.navigate('Cart');
+                  navigation.navigate("Cart");
                 }}
               />
             </CustomHeaderButtons>
@@ -88,7 +86,7 @@ const HomeStack = ({ navigation }) => {
                 title='menu'
                 iconName='ios-cart'
                 onPress={() => {
-                  navigation.navigate('Cart');
+                  navigation.navigate("Cart");
                 }}
               />
             </CustomHeaderButtons>
@@ -126,7 +124,6 @@ const ManageProducts = ({ navigation }) => {
         name='Manage Products'
         component={YourProductsScreen}
       />
-      <Stack.Screen name='Create Product' component={CreateProductScreen} />
       <Stack.Screen name='Edit' component={EditProductScreen} />
     </Stack.Navigator>
   );

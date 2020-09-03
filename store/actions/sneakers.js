@@ -5,6 +5,8 @@ export const SET_SIZE = "SET_SIZE";
 export const CLEAR_SIZE = "CLEAR_SIZE"
 export const CLEAR_CART = "CLEAR_CART"
 export const ORDER = 'ORDER'
+export const REMOVE_SNEAKERS = 'REMOVE_SNEAKERS'
+export const EDIT_SNEAKERS = 'EDIT_SNEAKERS'
 
 
 export const toggleCart = id => {
@@ -31,23 +33,24 @@ export const clearCart = () => {
   return { type: CLEAR_CART  }
 }
 
-export const addSneakers = (
-  id = null,
-  categoryBrand,
-  title,
-  description,
-  price,
-  size,
-  imageUrl
+export const editSneakers = (
+  id,
+  title = null,
+  description = null,
+  price = null,
+  size = null
 ) => {
   return {
-    sneakersId: id,
-    type: ADD_SNEAKERS,
-    categoryBrand: categoryBrand,
+    type: EDIT_SNEAKERS,
+    id: id,
     title: title,
     description: description,
     price: price,
     size: size,
-    imageUrl: imageUrl
   };
 };
+
+export const removeSneakers = id => {
+  return { type: REMOVE_SNEAKERS, id: id}
+}
+

@@ -1,24 +1,24 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import SneakersItem from "./SneakersItem";
+import SneakersItemEdit from "./SneakersItemEdit";
+import { useDispatch } from "react-redux";
+import { removeSneakers } from "../store/actions/sneakers";
 
 const SneakersList = props => {
-  
+  const dispatch = useDispatch();
+
+  const remove = id => dispatch(removeSneakers(id));
+
   const renderSneakersList = itemData => (
-    <SneakersItem
+    <SneakersItemEdit
       sneakersId={itemData.item.id}
       title={itemData.item.title}
       imageUrl={itemData.item.imageUrl}
-      cart={itemData.item.sizeSelected ? true : false }
-      date={itemData.item.date ? itemData.item.date : null }
-      size={itemData.item.sizeSelected ? itemData.item.sizeSelected : itemData.item.size}
-      quantity={itemData.item.quantity ? itemData.item.quantity : null}
       price={itemData.item.price}
-      onSelectSneakers={() => {
-        props.navigation.navigate("Details", {
-          sneakersId: itemData.item.id,
-          sneakersTitle: itemData.item.title,
-          categoryId: itemData.item.categoryIds
+      onRemove={() => remove(itemData.item.id)}
+      onEdit={() => {
+        props.navigation.navigate("Edit", {
+          sneakersId: itemData.item.id
         });
       }}
     />

@@ -71,7 +71,7 @@ const OrderScreen = props => {
     >
       <View style={{ flex: 1, justifyContent: "center" }}>
         <TextInput
-          style={styles.input}
+          style={[styles.input]}
           placeholder={"Address"}
           placeholderTextColor='black'
           onChangeText={text => onChangeAddress(text)}
@@ -90,6 +90,7 @@ const OrderScreen = props => {
           placeholderTextColor='black'
           onChangeText={text => onChangeEmail(text)}
           value={email}
+          autoCapitalize='none'
         />
         <TextInput
           style={styles.input}
@@ -102,7 +103,7 @@ const OrderScreen = props => {
           returnKeyType={"done"}
         />
         <TouchableOpacity
-          //   disabled={disabled}
+          disabled={disabled}
           onPress={validation}
           style={styles.appButtonContainer}
         >
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
-    elevation: 11
+    elevation: 1
   },
   appButtonContainer: {
     backgroundColor: "white",
